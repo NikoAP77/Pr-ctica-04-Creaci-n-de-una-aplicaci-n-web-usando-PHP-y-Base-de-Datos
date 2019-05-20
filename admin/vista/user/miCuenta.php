@@ -75,7 +75,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         <br>
 
         <a href="../metodo/actualizar.php?codigo=<?php echo $codigo; ?>"><input type="button" id="modificar" name="modificar" value="Modificar" /></a>
-        <a href="../metodo/eliminar.php?codigo=<?php echo $codigo; ?>"><input type="button" id="eliminar" name="eliminar" value="Eliminar" /></a>
         <a href="../metodo/cambiarContra.php?codigo=<?php echo $codigo; ?>"><input type="button" id="cambiar" name="cambiar" value="Cambiar Contrasena" /></a>
       </form>
     <?php
