@@ -31,6 +31,11 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
 
+            $codigoRemitente = $row['cor_usu_remitente'];
+            $sqlcorreo = "SELECT usu_correo FROM usuario WHERE usu_codigo = $codigoRemitente";
+            $remitente = $conn->query($sqlcorreo);
+            $row2 = $remitente->fetch_assoc();
+
             $codigoDestinatario = $row['cor_usu_destinatario'];
             $sqlcorreod = "SELECT usu_correo FROM usuario WHERE usu_codigo = $codigoDestinatario";
             $destinatario = $conn->query($sqlcorreod);
@@ -41,8 +46,12 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             <form id="form" method='POST' action='../../controladores/contrEliminarCorreo.php'>
                 <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
 
-                <label for="correo">Correo</label>
-                <input type="text" id="correo" name="correo" value="<?php echo $row3["usu_asunto"] ?>" disabled />
+                <label for="correo0">Remitente</label>
+                <input type="text" id="correo0" name="correo0" value="<?php echo $row2["usu_correo"] ?>" disabled />
+                <br>
+
+                <label for="correo">Destinatario</label>
+                <input type="text" id="correo" name="correo" value="<?php echo $row3["usu_correo"] ?>" disabled />
                 <br>
 
                 <label for="asunto">Asunto</label>
@@ -52,6 +61,9 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 <label for="mensaje">Mensaje</label>
                 <input type="textarea" id="mensaje" name="mensaje" value="<?php echo $row["cor_mensaje"]; ?>" disabled />
                 <br>
+
+                <input type="submit" id="eliminar" name="eliminar" value="Eliminar" />
+                <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
             </form>
         <?php
     }
