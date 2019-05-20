@@ -65,7 +65,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 echo "   <td>" . $row2['usu_correo'] . "</td>";
                 echo "   <td>" . $row3['usu_correo'] . "</td>";
                 echo "   <td>" . $row['cor_asunto'] . "</td>";
-                echo "   <td>" . "<a href = 'eliminar.php?codigo=" . $row['cor_codigo'] . "'>" . "Eliminar</a>" . "</td>";
+                echo "   <td>" . "<a href = '../metodo/eliminarCorreo.php?codigo=" . $row['cor_codigo'] . "'>" . "Eliminar</a>" . "</td>";
                 echo "</tr>";
             }
         } else {
