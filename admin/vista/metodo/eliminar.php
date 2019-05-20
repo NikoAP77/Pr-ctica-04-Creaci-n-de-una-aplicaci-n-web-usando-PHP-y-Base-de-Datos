@@ -13,6 +13,7 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
      <title>Document</title>
      <link href="../../../config/estiloLogin.css" rel="stylesheet"/>
+     <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" /> 
    </head>
    <body> 
     <?php
@@ -26,7 +27,7 @@
        if($result->num_rows> 0) {
         while($row= $result->fetch_assoc()) {
           ?>
-            <form method='POST' action='../../controladores/contrEliminar.php'>
+            <form id="form" method='POST' action='../../controladores/contrEliminar.php'>
             <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
 
             <label for="cedula">Cedula</label>

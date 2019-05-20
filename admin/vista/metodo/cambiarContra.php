@@ -11,6 +11,7 @@
   <meta charset="UTF-8">  
   <title>Modificar datos de persona</title>
   <link href="../../../config/estiloLogin.css" rel="stylesheet"/>
+  <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" /> 
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     $codigo = $_GET["codigo"];
 ?>
 
-<form id="formulario01" method="POST" action="../../controladores/contrCambiarContra.php">
+<form id="form" method="POST" action="../../controladores/contrCambiarContra.php">
   <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
 
   <label for="cedula">Contraseña Actual</label>

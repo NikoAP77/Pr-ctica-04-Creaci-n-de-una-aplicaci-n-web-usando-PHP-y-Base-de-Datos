@@ -44,7 +44,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
       ?>
-      <form id="formulario01" method="POST">
+      <form id="form" method="POST">
         <br>
         <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo; ?>" />
         <label for="cedula">Cedula</label>

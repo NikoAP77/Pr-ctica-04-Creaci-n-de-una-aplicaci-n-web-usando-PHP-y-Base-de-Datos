@@ -58,5 +58,6 @@ echo"<a href ='../../../public/vista/login.html'>Cerrar Sesion</a>";
     $conn->close();
 ?>
 </table>
+
 </body>
 </html>

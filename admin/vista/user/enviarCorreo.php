@@ -13,6 +13,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Enviar Correo</title>
     <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" />
+    <link href="../../../config/estiloLogin.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,7 +29,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         </nav>
     </header>
 
-    <form id="formulario01" method="POST" action='../../controladores/user/enviarCorreo.php'>
+    <form id="form" method="POST" action='../../controladores/user/enviarCorreo.php'>
     <br>
         <label for="destinatario">Correo</label>
         <input type="text" id="destinatario" name="destinatario" value="" placeholder="Ingrese correo destinatario" required />
@@ -39,7 +40,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         <br>
 
         <label for="mensaje">Mensaje</label>
-        <textarea type="text" id="mensaje" name="mensaje" value="" required>  </textarea>
+        <textarea id="area"type="text" id="mensaje" name="mensaje" value="" required>  </textarea>
         <br>
 
         <input type="submit" id="enviar" name="enviar" value="Enviar" />
