@@ -73,3 +73,9 @@
             font-weight: 400;
             -webkit-appearance: none;
         }
+
+        h6 {
+            text-align: right;
+            padding: 1px;
+            margin: 1px;
+        }
