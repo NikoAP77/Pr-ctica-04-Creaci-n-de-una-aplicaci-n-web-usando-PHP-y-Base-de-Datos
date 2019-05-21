@@ -36,8 +36,9 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         </nav>
     </header>
 
-    <section>
-    <h6> <img src="../../../public/usu.png"><br> <?php echo  $nombre . ' ' . $apellido ?></h6>
+    <section>     
+    <h6> <img id="img" src=<?php echo "../../../public/".$apellido.".png" ?>><h6> 
+    </h6>    <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
     </section>
 
 

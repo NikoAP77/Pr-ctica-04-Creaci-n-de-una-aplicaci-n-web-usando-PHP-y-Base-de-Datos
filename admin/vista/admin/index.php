@@ -1,13 +1,15 @@
 <?php
 session_start();
+$nombre = $_SESSION['nombre'];
+$apellido = $_SESSION['apellido'];
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
+echo($apellido);
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Mensajes Recibidos</title>
@@ -24,6 +26,11 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             </ul>
         </nav>
     </header>
+
+    <section>     
+    <h6> <img id="img" src=<?php echo "../../../public/".$apellido.".png" ?>><h6> 
+    </h6>    <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+    </section>
 
     <section>
         <br>
