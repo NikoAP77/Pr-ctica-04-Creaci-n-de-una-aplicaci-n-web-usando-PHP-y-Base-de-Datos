@@ -26,7 +26,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     $asunto = isset($_POST["asunto"]) ? trim($_POST["asunto"]) : null;
     $mensaje = isset($_POST["mensaje"]) ? trim($_POST["mensaje"]) : null;
 
-    $sql = "SELECT usu_codigo FROM usuario WHERE usu_correo = '$destinatario'";
+    $sql = "SELECT usu_codigo, usu_rol FROM usuario WHERE usu_correo = '$destinatario'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $codDestinatario = $row['usu_codigo'];
