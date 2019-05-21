@@ -5,7 +5,6 @@ $apellido = $_SESSION['apellido'];
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
-echo($apellido);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ echo($apellido);
     </header>
 
     <section>     
-    <h6> <img id="img" src=<?php echo "../../../public/".$apellido.".png" ?>><h6> 
+    <h6> <img id="img" src=<?php echo "../../../public/imagenes/".$apellido.".png" ?>><h6> 
     </h6>    <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
     </section>
 
