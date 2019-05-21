@@ -1,10 +1,14 @@
 <?php
 session_start();
+$nombre = $_SESSION['nombre'];
+$apellido = $_SESSION['apellido'];
 $codigo = $_SESSION['codigo'];
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -32,11 +36,17 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         </nav>
     </header>
 
+    <section>
+    <h4> <img id="imagen" src="../../../public/usu.png"><br> <?php echo  $nombre . ' ' . $apellido ?></h4>
+    </section>
+
+
 
     <section>
         <br>
         <h1>Mensajes Recibidos</h1>
     </section>
+    
     
     <input autofocus type="text" id="buscar" name="buscar" value="" placeholder="Buscar por remitente" onkeyup="buscarPorCorreo()" />
 
