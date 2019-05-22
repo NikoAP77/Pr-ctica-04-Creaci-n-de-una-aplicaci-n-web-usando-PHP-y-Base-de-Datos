@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+$codigo = $_SESSION['codigo'];
+$nombre = $_SESSION['nombre'];
+$apellido = $_SESSION['apellido'];
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
