@@ -3,7 +3,7 @@ session_start();
 $codigo = $_SESSION['codigo'];
 $nombre = $_SESSION['nombre'];
 $apellido= $_SESSION['apellido'];
-if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
+if (!isset($_SESSION['isUser']) || $_SESSION['isUser'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
 ?>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 <li><a href="enviarCorreo.php">Nuevo Mensaje</a></li>
                 <li><a href="mensajesEnviados.php">Mensajes Enviados</a></li>
                 <li><a href="miCuenta.php">Mi Cuenta</a></li>
-                <li id="cerrar"><a href='../../../config/cerrar_sesion.php'>Cerrar Sesion</a></li>
+                <li id="cerrar"><a href='../../../config/cerrar_sesionUser.php'>Cerrar Sesion</a></li>
             </ul>
         </nav>
     </header>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 echo "   <td>" . $row["cor_fecha_hora"] . "</td>";
                 echo "   <td>" . $row3['usu_correo'] . "</td>";
                 echo "   <td>" . $row['cor_asunto'] . "</td>";
-                echo "   <td>" . "<a href = 'eliminar.php?codigo=" . $row['cor_codigo'] . "'>" . "Leer</a>" . "</td>";
+                echo "   <td>" . "<a href = '../../controladores/user/leer.php?codigo=" . $row['cor_codigo'] . "'>" . "Leer</a>" . "</td>";
                 echo "</tr>";
             }
         } else {

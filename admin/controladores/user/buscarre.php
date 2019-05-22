@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codigoAdmin = $_SESSION['codigo'];
-if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
+if (!isset($_SESSION['isUser']) || $_SESSION['isUser'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
 ?>

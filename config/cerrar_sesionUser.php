@@ -1,6 +1,6 @@
 <?php
  session_start();
- $_SESSION['isLogged'] = FALSE;
+ $_SESSION['isUser'] = FALSE;
  session_destroy();
  header("Location: /SistemaDeGestion/public/vista/login.html");
 ?>

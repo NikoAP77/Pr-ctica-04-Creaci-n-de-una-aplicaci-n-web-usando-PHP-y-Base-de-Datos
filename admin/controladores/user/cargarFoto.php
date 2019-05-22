@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['isUser']) || $_SESSION['isUser'] === FALSE) {
+    header("Location: /SistemaDeGestion/public/vista/login.html");
+}
+?>
+<?php
 include '../../../config/conexionBD.php';
 
 $codigo = $_SESSION['codigo'];

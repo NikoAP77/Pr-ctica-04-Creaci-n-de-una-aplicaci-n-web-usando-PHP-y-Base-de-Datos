@@ -19,11 +19,13 @@ if($result->num_rows> 0) {
         $_SESSION['correo'] = "$usuario";
         $_SESSION['rol'] = "$row[usu_rol]";
     }    
-    $_SESSION['isLogged'] = TRUE;
-    if ($_SESSION['rol']=="admin"){
-        header("Location: ../../admin/vista/admin/index.php");
-    }else{
+    if ($_SESSION['rol']=="user"){  
+        $_SESSION['isUser'] = TRUE; 
         header("Location: ../../admin/vista/user/index.php");
+
+    }else if ($_SESSION['rol']=="admin"){ 
+        $_SESSION['isAdmin'] = TRUE; 
+        header("Location: ../../admin/vista/admin/index.php"); 
     }
     }else{    header("Location: ../vista/login.html");
 }

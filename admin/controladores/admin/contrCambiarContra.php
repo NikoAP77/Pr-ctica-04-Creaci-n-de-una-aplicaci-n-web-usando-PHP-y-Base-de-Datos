@@ -2,7 +2,7 @@
 session_start();
 $codigoAdmin = $_SESSION['codigo'];
 $rol = $_SESSION['rol'];
-if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
+if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
 ?>

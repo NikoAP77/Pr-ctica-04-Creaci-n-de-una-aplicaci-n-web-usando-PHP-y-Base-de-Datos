@@ -3,7 +3,7 @@ session_start();
 $codigo = $_SESSION['codigo'];
 $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
-if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
+if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
 ?>
@@ -23,7 +23,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             <ul>
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="usuarios.php">Usuarios</a></li>
-                <li id="cerrar"><a href='../../../config/cerrar_sesion.php'>Cerrar Sesion</a></li>
+                <li id="cerrar"><a href='../../../config/cerrar_sesionAdmin.php'>Cerrar Sesion</a></li>
             </ul>
         </nav>
     </header>
