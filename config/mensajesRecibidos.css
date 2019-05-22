@@ -85,4 +85,6 @@
             height:115px;
         }
 
-       
+       #fr{
+           float: right;
+       }

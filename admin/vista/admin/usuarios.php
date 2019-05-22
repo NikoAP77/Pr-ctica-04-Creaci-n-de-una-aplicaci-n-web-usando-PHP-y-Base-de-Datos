@@ -39,12 +39,17 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             ?>
             <br>
             <br>
-            <h6> <img id="img" src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
-                <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+            <h6> <img width=115px height="115px" margin="20px" src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
+                <h6><?php echo  $row['usu_nombres'] . ' ' . $row['usu_apellidos'] ?></h6>
             <?php
         }
         ?>
 
+            <form id="fr" method="POST" action="../../controladores/user/cargarFoto.php"  enctype="multipart/form-data">    
+            <input type="file" id="foto" name="foto" />
+            <br>
+            <input type="submit" id="cargar" value="cargar" name="cargar" />
+            </form>
     </section>
 
     <section>
