@@ -19,13 +19,10 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 
 <body>
     <?php
-
     $codigo = $_GET['codigo'];
     $sql = "SELECT * FROM correos WHERE cor_codigo = '$codigo'";
 
     include '../../../config/conexionBD.php';
-
-
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -40,7 +37,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             $sqlcorreod = "SELECT usu_correo FROM usuario WHERE usu_codigo = $codigoDestinatario";
             $destinatario = $conn->query($sqlcorreod);
             $row3 = $destinatario->fetch_assoc();
-
 
             ?>
             <form id="form" method='POST' action='../user/index.php'>

@@ -14,8 +14,8 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Modificar Datos Usuario</title>
-  <link href="../../../config/estiloLogin.css" rel="stylesheet"/>
-  <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" /> 
+  <link href="../../../config/estiloLogin.css" rel="stylesheet" />
+  <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -23,13 +23,15 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
   include '../../../config/conexionBD.php';
   $codigo = $_GET['codigo'];
 
-    $sql = "SELECT * FROM usuario WHERE usu_codigo = '$codigo'";
-    $result = $conn->query($sql);
+  $sql = "SELECT * FROM usuario WHERE usu_codigo = '$codigo'";
+  $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      if ($row['usu_rol'] == 'user') {
+
         ?>
-        <form id="form" method="POST" action="../../controladores/contrActualizar.php">
+        <form id="form" method="POST" action="../../controladores/admin/contrActualizar.php">
           <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
           <label for="cedula">Cedula</label>
           <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>" required placeholder="Ingrese la cedula ..." />
@@ -61,11 +63,16 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
           <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
         </form>
       <?php
+    } else { 
+      echo "<p>No se puede realizar esta accion a un usuario Admin!</p>";
+      echo "<br>";
+      echo "<a href='../admin/usuarios.php'>Regresar</a>";
     }
-  } else {
-    echo "<p>Ha ocurrido un error inesperado !</p>";
-    echo "<p>" . mysqli_error($conn) . "</p>";
   }
+} else {
+  echo "<p>Ha ocurrido un error inesperado !</p>";
+  echo "<p>" . mysqli_error($conn) . "</p>";
+}
 $conn->close();
 ?>
 </body>

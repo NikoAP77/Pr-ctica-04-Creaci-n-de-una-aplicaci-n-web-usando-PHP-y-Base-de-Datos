@@ -26,9 +26,23 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         </nav>
     </header>
 
-    <section>     
-    <h6> <img id="img" src=<?php echo "../../../public/imagenes/".$apellido.".png" ?>><h6> 
-    </h6>    <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+    <section>
+        <?php
+        include '../../../config/conexionBD.php';
+        $sql = "SELECT * FROM usuario WHERE usu_codigo= $codigo";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc()
+            ?>
+            <br>
+            <br>
+            <h6> <img id="img" src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
+            <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+            <?php
+        }
+        ?>
+            
     </section>
 
     <section>

@@ -17,7 +17,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 </head>
 
 <body>
-
     <?php
     //incluir conexión a la base de datos
     include '../../../config/conexionBD.php';
@@ -30,7 +29,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $codDestinatario = $row['usu_codigo'];
-    
+
     $rol = $row['usu_rol'];
 
     if ($rol == 'user') {
@@ -47,6 +46,5 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     $conn->close();
     echo "<a href='../../vista/user/index.php'>Regresar</a>";
     ?>
-
 </body>
 <html>

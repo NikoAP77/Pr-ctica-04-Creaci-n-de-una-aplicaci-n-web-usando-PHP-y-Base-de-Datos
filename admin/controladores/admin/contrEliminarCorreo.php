@@ -48,9 +48,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     }
     echo "<a href='../vista/admin/index.php'>Regresar</a>";
   }
-
   $conn->close();
   ?>
 </body>
-
 </html>

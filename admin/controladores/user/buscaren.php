@@ -8,9 +8,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 <!DOCTYPE html>
 <html>
 
-<head>
-</head>
-
 <body>
     <table style="width:100%">
         <tr>

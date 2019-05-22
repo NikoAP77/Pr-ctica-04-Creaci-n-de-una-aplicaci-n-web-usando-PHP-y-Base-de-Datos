@@ -8,8 +8,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +16,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     <title>Mensajes Recibidos</title>
     <script type="text/javascript" src="../../controladores/js/buscarre.js"></script>
     <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" />
-
 
 </head>
 
@@ -36,21 +33,31 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
         </nav>
     </header>
 
-    <section>     
-    <h6> <img id="img" src=<?php echo "../../../public/imagenes/".$apellido.".png" ?>><h6> 
-    </h6>    <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+    <section>
+        <?php
+        include '../../../config/conexionBD.php';
+        $sql = "SELECT * FROM usuario WHERE usu_codigo= $codigo";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc()
+            ?>
+            <br>
+            <br>
+            <h6> <img id="img" src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
+            <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+            <?php
+        }
+        ?>
+            
     </section>
-
-
 
     <section>
         <br>
         <h1>Mensajes Recibidos</h1>
     </section>
-    
-    
-    <input autofocus type="text" id="buscar" name="buscar" value="" placeholder="Buscar por remitente" onkeyup="buscarPorCorreo()" />
 
+    <input autofocus type="text" id="buscar" name="buscar" value="" placeholder="Buscar por remitente" onkeyup="buscarPorCorreo()" />
 
     <table style="width:100%" id="info">
         <tr>
@@ -59,14 +66,12 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             <th>Asunto</th>
             <th>Leer</th>
         </tr>
-
         <?php
 
         include '../../../config/conexionBD.php';
         $sql = "SELECT * FROM correos WHERE cor_eliminado='N' AND cor_usu_destinatario = $codigo ORDER BY cor_fecha_hora DESC;";
 
         $result = $conn->query($sql);
-
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $codigoRemitente = $row['cor_usu_remitente'];
@@ -77,7 +82,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 echo "   <td>" . $row["cor_fecha_hora"] . "</td>";
                 echo "   <td>" . $row2['usu_correo'] . "</td>";
                 echo "   <td>" . $row['cor_asunto'] . "</td>";
-                echo "   <td>" . "<a href = '../metodo/leer.php?codigo=" . $row['cor_codigo'] . "'>" . "Leer</a>" . "</td>";
+                echo "   <td>" . "<a href = '../../controladores/user/leer.php?codigo=" . $row['cor_codigo'] . "'>" . "Leer</a>" . "</td>";
                 echo "</tr>";
             }
         } else {
@@ -85,8 +90,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             echo "   <td colspan='7'> No existen correos recibidos </td>";
             echo "</tr>";
         }
-        
-
 
         $conn->close();
         ?>

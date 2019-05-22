@@ -1,6 +1,8 @@
 <?php
 session_start();
 $codigo = $_SESSION['codigo'];
+$nombre = $_SESSION['nombre'];
+$apellido = $_SESSION['apellido'];
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
   header("Location: /SistemaDeGestion/public/vista/login.html");
 }
@@ -21,71 +23,96 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 <body>
   <header>
     <section>
-    <nav>
-      <ul>
-        <li><a href="index.php">Inicio</a></li>
-        <li><a href="enviarCorreo.php">Nuevo Mensaje</a></li>
-        <li><a href="mensajesEnviados.php">Mensajes Enviados</a></li>
-        <li><a href="miCuenta.php">Mi Cuenta</a></li>
-        <li id="cerrar"><a href='../../../config/cerrar_sesion.php'>Cerrar Sesion</a></li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="index.php">Inicio</a></li>
+          <li><a href="enviarCorreo.php">Nuevo Mensaje</a></li>
+          <li><a href="mensajesEnviados.php">Mensajes Enviados</a></li>
+          <li><a href="miCuenta.php">Mi Cuenta</a></li>
+          <li id="cerrar"><a href='../../../config/cerrar_sesion.php'>Cerrar Sesion</a></li>
+        </ul>
+      </nav>
     </section>
   </header>
 
-  <?php
+
+    <?php
+    include '../../../config/conexionBD.php';
+    //$codigo = $_GET['codigo']; 
+
+
+    $sql = "SELECT * FROM usuario WHERE usu_codigo = $codigo";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        ?>
+        <form id="form" method="POST">
+          <br>
+          <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo; ?>" />
+          <label for="cedula">Cedula</label>
+          <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>" disabled placeholder="Ingrese la cedula ..." />
+          <br>
+          <label for="nombres">Nombres</label>
+          <input type="text" id="nombres" name="nombres" value="<?php echo $row["usu_nombres"];
+                                                                ?>" disabled placeholder="Ingrese los dos nombres ..." />
+          <br>
+          <label for="apellidos">Apelidos</label>
+          <input type="text" id="apellidos" name="apellidos" value="<?php echo $row["usu_apellidos"];
+                                                                    ?>" disabled placeholder="Ingrese los dos apellidos ..." />
+          <br>
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" value="<?php echo $row["usu_direccion"];
+                                                                    ?>" disabled placeholder="Ingrese la dirección ..." />
+          <br>
+          <label for="telefono">Teléfono</label>
+          <input type="text" id="telefono" name="telefono" value="<?php echo $row["usu_telefono"];
+                                                                  ?>" disabled placeholder="Ingrese el teléfono ..." />
+          <br>
+          <label for="fecha">Fecha Nacimiento</label>
+          <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo
+                                                                                  $row["usu_fecha_nacimiento"]; ?>" disabled placeholder="Ingrese la fecha de nacimiento ..." />
+          <br>
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" value="<?php echo $row["usu_correo"]; ?>" disabled placeholder="Ingrese el correo electrónico ..." />
+          <br>
+
+          <a href="../metodo/actualizar.php?codigo=<?php echo $codigo; ?>"><input type="button" id="modificar" name="modificar" value="Modificar" /></a>
+          <a href="../metodo/cambiarContra.php?codigo=<?php echo $codigo; ?>"><input type="button" id="cambiar" name="cambiar" value="Cambiar Contrasena" /></a>
+        </form>
+      <?php
+    }
+  } else {
+    echo "<p>Ha ocurrido un error inesperado !</p>";
+    echo "<p>" . mysqli_error($conn) . "</p>";
+  }
+
+
+  $conn->close();
+  ?>
+
+<section>
+<?php
   include '../../../config/conexionBD.php';
-  //$codigo = $_GET['codigo']; 
-
-
-  $sql = "SELECT * FROM usuario WHERE usu_codigo = $codigo";
+  $sql = "SELECT * FROM usuario WHERE usu_codigo= $codigo";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    $row = $result->fetch_assoc()
       ?>
-      <form id="form" method="POST">
-        <br>
-        <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo; ?>" />
-        <label for="cedula">Cedula</label>
-        <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>" disabled placeholder="Ingrese la cedula ..." />
-        <br>
-        <label for="nombres">Nombres</label>
-        <input type="text" id="nombres" name="nombres" value="<?php echo $row["usu_nombres"];
-                                                              ?>" disabled placeholder="Ingrese los dos nombres ..." />
-        <br>
-        <label for="apellidos">Apelidos</label>
-        <input type="text" id="apellidos" name="apellidos" value="<?php echo $row["usu_apellidos"];
-                                                                  ?>" disabled placeholder="Ingrese los dos apellidos ..." />
-        <br>
-        <label for="direccion">Dirección</label>
-        <input type="text" id="direccion" name="direccion" value="<?php echo $row["usu_direccion"];
-                                                                  ?>" disabled placeholder="Ingrese la dirección ..." />
-        <br>
-        <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" name="telefono" value="<?php echo $row["usu_telefono"];
-                                                                ?>" disabled placeholder="Ingrese el teléfono ..." />
-        <br>
-        <label for="fecha">Fecha Nacimiento</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo
-                                                                                $row["usu_fecha_nacimiento"]; ?>" disabled placeholder="Ingrese la fecha de nacimiento ..." />
-        <br>
-        <label for="correo">Correo electrónico</label>
-        <input type="email" id="correo" name="correo" value="<?php echo $row["usu_correo"]; ?>" disabled placeholder="Ingrese el correo electrónico ..." />
-        <br>
-
-        <a href="../metodo/actualizar.php?codigo=<?php echo $codigo; ?>"><input type="button" id="modificar" name="modificar" value="Modificar" /></a>
-        <a href="../metodo/cambiarContra.php?codigo=<?php echo $codigo; ?>"><input type="button" id="cambiar" name="cambiar" value="Cambiar Contrasena" /></a>
-      </form>
-    <?php
+      <br>
+      <br>
+      <h6> <img width= 323px height="323px" margin="20px"   src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
+      <h1><?php echo  $row['usu_nombres'] . ' ' . $row['usu_apellidos'] ?></h1>
+      <?php
   }
-} else {
-  echo "<p>Ha ocurrido un error inesperado !</p>";
-  echo "<p>" . mysqli_error($conn) . "</p>";
-}
+  ?>
 
-$conn->close();
-?>
+    <form id="form" method="POST" action="../../controladores/user/cargarFoto.php" enctype="multipart/form-data">
+      <input type="file" id="foto" name="foto" />
+      <input type="submit" id="cargar" value="cargar" name="cargar" />
+    </form>
+</section>
 </body>
 
 </html>

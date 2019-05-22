@@ -42,7 +42,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             "usu_fecha_nacimiento = '$fechaNacimiento', " .
             "usu_fecha_modificacion = '$fecha' " .
             "WHERE usu_codigo = $codigo";
-
         if ($conn->query($sql) === TRUE) {
             echo "Se ha actualizado los datos personales correctamemte!!!<br>";
         } else {
@@ -61,7 +60,6 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
                 "usu_fecha_nacimiento = '$fechaNacimiento', " .
                 "usu_fecha_modificacion = '$fecha' " .
                 "WHERE usu_codigo = $codigo";
-
             if ($conn->query($sql) === TRUE) {
                 echo "Se ha actualizado los datos personales correctamemte!!!<br>";
             } else {

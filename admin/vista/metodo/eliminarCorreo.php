@@ -41,9 +41,8 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             $destinatario = $conn->query($sqlcorreod);
             $row3 = $destinatario->fetch_assoc();
 
-
             ?>
-            <form id="form" method='POST' action='../../controladores/contrEliminarCorreo.php'>
+            <form id="form" method='POST' action='../../controladores/admin/contrEliminarCorreo.php'>
                 <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
 
                 <label for="correo0">Remitente</label>
