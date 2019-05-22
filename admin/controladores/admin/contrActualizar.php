@@ -2,9 +2,9 @@
 session_start();
 $codigoAdmin = $_SESSION['codigo'];
 $rol = $_SESSION['rol'];
-if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
+if ((!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE)&&(!isset($_SESSION['isUser']) || $_SESSION['isUser'] === FALSE)) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
-}
+  }
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
 <body>
     <?php
     //incluir conexión a la base de datos
-    include '../../config/conexionBD.php';
+    include '../../../config/conexionBD.php';
 
     $codigo = $_POST["codigo"];
     $cedula = isset($_POST["cedula"]) ? trim($_POST["cedula"]) : null;
@@ -47,7 +47,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
         }
-        echo "<a href='../vista/admin/usuarios.php'>Regresar</a>";
+        echo "<a href='../../vista/admin/usuarios.php'>RegresarU</a>";
     } else {
         if ($codigoAdmin == $codigo) {
             $sql = "UPDATE usuario " .
@@ -65,8 +65,8 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
             }
-        }
-        echo "<a href='../vista/user/miCuenta.php'>Regresar</a>";
+        } 
+        echo "<a href='../../vista/user/miCuenta.php'>Regresar</a>";
     }
     $conn->close();
     ?>

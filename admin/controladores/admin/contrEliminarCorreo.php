@@ -18,7 +18,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
 <body>
   <?php
   //incluir conexión a la base de datos
-  include '../../config/conexionBD.php';
+  include '../../../config/conexionBD.php';
 
   $codigo = $_POST["codigo"];
 
@@ -35,7 +35,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
     } else {
       echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
     }
-    echo "<a href='../vista/admin/index.php'>Regresar</a>";
+    echo "<a href='../../vista/admin/index.php'>Regresar</a>";
   } else {
     if ($codigoAdmin == $codigo) {
       $sql = "UPDATE correos SET cor_eliminado = 'S', cor_fecha_modificacion = '$fecha' WHERE cor_codigo = $codigo";
@@ -46,7 +46,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] === FALSE) {
         echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
       }
     }
-    echo "<a href='../vista/admin/index.php'>Regresar</a>";
+    echo "<a href='../../vista/admin/index.php'>Regresar</a>";
   }
   $conn->close();
   ?>
