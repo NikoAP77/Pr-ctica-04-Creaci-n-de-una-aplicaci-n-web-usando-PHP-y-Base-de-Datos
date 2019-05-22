@@ -13,7 +13,7 @@
 
     <?php
     //incluir conexión a la base de datos
-    include'../../config/conexionBD.php';                
+    include '../../config/conexionBD.php';                
     
     $cedula= isset($_POST["cedula"]) ? trim($_POST["cedula"]) : null;
     $nombres= isset($_POST["nombres"]) ? mb_strtoupper(trim($_POST["nombres"]), 'UTF-8') : null;    
@@ -25,7 +25,7 @@
     $contrasena= isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
 
     $sql= "INSERT INTO usuario VALUES(0, '$cedula', '$nombres', '$apellidos', '$direccion', '$telefono', 
-    '$correo', MD5('$contrasena'), '$fechaNacimiento', 'N', null, null, 'user')";        
+    '$correo', MD5('$contrasena'), '$fechaNacimiento', 'N', null, null, 'user', null)";        
     
     if($conn->query($sql) === TRUE) {
         echo"<p>Se ha creado los datos personales correctamemte!!!</p>";
