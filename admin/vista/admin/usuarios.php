@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
     header("Location: /SistemaDeGestion/public/vista/login.html");
 }
@@ -11,7 +12,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
 <head>
     <meta charset="UTF-8">
     <title>Gestión de usuarios</title>
-    <link href="../../../config/mensajesRecibidos.css" rel="stylesheet"/>
+    <link href="../../../config/mensajesRecibidos.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -24,6 +25,25 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             </ul>
         </nav>
     </header>
+
+    <section>
+        <?php
+        include '../../../config/conexionBD.php';
+        $sql = "SELECT * FROM usuario WHERE usu_codigo= $codigo";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc()
+            ?>
+            <br>
+            <br>
+            <h6> <img id="img" src="data:image/jpg;base64,<?php echo base64_encode($row['usu_foto']) ?>">
+                <h6><?php echo  $nombre . ' ' . $apellido ?></h6>
+            <?php
+        }
+        ?>
+
+    </section>
 
     <section>
         <br>
@@ -72,7 +92,7 @@ if (!isset($_SESSION['isLogged']) || $_SESSION['isLogged'] === FALSE) {
             echo "   <td colspan='7'> No existen usuarios registradas en el sistema </td>";
             echo "</tr>";
         }
-        
+
         $conn->close();
         ?>
     </table>
